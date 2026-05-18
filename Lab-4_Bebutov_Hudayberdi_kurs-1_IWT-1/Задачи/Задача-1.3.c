@@ -1,45 +1,66 @@
 #include <stdio.h>
-#include <math.h>
+#include <stdlib.h>
 
-typedef struct {
-    double re;
-    double im;
-} Complex;
+double** allocate_matrix(size_t rows, size_t cols) {
+    double** matrix = malloc(rows * sizeof(double*));
+    if (matrix == NULL) {
+        return NULL;
+    }
+    for (size_t i = 0; i < rows; i++) {
+        matrix[i] = malloc(cols * sizeof(double));
+        if (matrix[i] == NULL) {
+            for (size_t j = 0; j < i; j++) {
+                free(matrix[j]);
+            }
+            free(matrix);
+            return NULL;
+        }
+    }
+    return matrix;
+}
+
+void free_matrix(double** matrix, size_t rows) {
+    if (matrix == NULL) {
+        return;
+    }
+    for (size_t i = 0; i < rows; i++) {
+        free(matrix[i]);
+    }
+    free(matrix);
+}
+
+void fill_matrix(double** matrix, size_t rows, size_t cols) {
+    for (size_t i = 0; i < rows; i++) {
+        for (size_t j = 0; j < cols; j++) {
+            scanf("%lf", &matrix[i][j]);
+        }
+    }
+}
+
+void print_matrix(double** matrix, size_t rows, size_t cols) {
+    for (size_t i = 0; i < rows; i++) {
+        for (size_t j = 0; j < cols; j++) {
+            printf("%.0f ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
 
 int main() {
-    Complex z;
-    Complex sum = {1.0, 0.0};
-    Complex term = {1.0, 0.0};
-    double factorial = 1.0;
-    int k = 1;
-    double eps = 1e-8;
-    double mag;
-
-    printf("Введите действительную и мнимую части: ");
-    scanf("%lf %lf", &z.re, &z.im);
-
-    while (1) {
-        factorial *= k;
-        
-        Complex next_term;
-        next_term.re = (term.re * z.re - term.im * z.im) / factorial;
-        next_term.im = (term.re * z.im + term.im * z.re) / factorial;
-        
-        term = next_term;
-        
-        sum.re += term.re;
-        sum.im += term.im;
-        
-        mag = sqrt(term.re * term.re + term.im * term.im);
-        
-        if (mag < eps) {
-            break;
-        }
-        
-        k++;
+    size_t rows, cols;
+    
+    scanf("%zu %zu", &rows, &cols);
+    
+    double** matrix = allocate_matrix(rows, cols);
+    if (matrix == NULL) {
+        printf("Memory allocation failed\n");
+        return 1;
     }
     
-    printf("exp(z) = %.6lf + %.6lfi\n", sum.re, sum.im);
+    fill_matrix(matrix, rows, cols);
+    print_matrix(matrix, rows, cols);
+    
+    free_matrix(matrix, rows);
     
     return 0;
 }
