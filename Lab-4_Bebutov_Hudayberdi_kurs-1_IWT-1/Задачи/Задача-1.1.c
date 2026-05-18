@@ -1,19 +1,26 @@
 #include <stdio.h>
 
-typedef void (*FunctionPointer)(void);
-
-void myFunction(void) {
-    printf("Функция вызвана через указатель из структуры!\n");
+int factorial_iter(int n) {
+    int result = 1;
+    for (int i = 1; i <= n; i++) {
+        result = result * i;
+    }
+    return result;
 }
 
-struct MyStruct {
-    FunctionPointer func;
-};
+int factorial_rec(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial_rec(n - 1);
+}
 
 int main() {
-    struct MyStruct s = { myFunction };
-
-    s.func();
-
+    int n;
+    scanf("%d", &n);
+    int iter_result = factorial_iter(n);
+    int rec_result = factorial_rec(n);
+    printf("%d\n", iter_result);
+    printf("%d\n", rec_result);
     return 0;
 }
