@@ -2,8 +2,8 @@
 
 int main() {
     int a, b;
-    int *pa = &a, *pb = &b;
-    scanf("%d %d", pa, pb);
-    printf("%d\n", *pa + *pb);
+    scanf("%d %d", &a, &b);
+    int sum = a + b;
+    printf("%d\n", sum);
     return 0;
 }
