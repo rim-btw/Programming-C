@@ -1,18 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int main() {
-    int n;
+    int n, sum;
+    
     scanf("%d", &n);
-    int *arr = (int*)malloc(n * sizeof(int));
-    if (!arr) return 1;
-    int *ptr = arr;
-    for (int i = 0; i < n; i++, ptr++)
-        scanf("%d", ptr);
-    ptr = arr + n - 1;
-    for (int i = 0; i < n; i++, ptr--)
-        printf("%d ", *ptr);
-    printf("\n");
-    free(arr);
+    
+    sum = n * (n + 1) / 2;
+    
+    printf("%d\n", sum);
+    
     return 0;
 }
