@@ -1,10 +1,14 @@
 #include <stdio.h>
 
 int main() {
-    int a, b;
-    int *pa = &a, *pb = &b;
-    scanf("%d %d", pa, pb);
-    int max = (*pa > *pb) ? *pa : *pb;
-    printf("%d\n", max);
+    int n;
+    scanf("%d", &n);
+    
+    if (n % 2 == 0) {
+        printf("EVEN\n");
+    } else {
+        printf("ODD\n");
+    }
+    
     return 0;
 }
