@@ -1,24 +1,20 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int main() {
-    int rows = 2, cols = 3;
-    int **matrix = (int**)malloc(rows * sizeof(int*));
-    for (int i = 0; i < rows; i++)
-        matrix[i] = (int*)malloc(cols * sizeof(int));
-
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < cols; j++)
-            scanf("%d", &matrix[i][j]);
-
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++)
-            printf("%d ", matrix[i][j]);
-        printf("\n");
+    unsigned long data;
+    union {
+        unsigned long val;
+        unsigned char byte[sizeof(unsigned long)];
+    } bytes_union;
+    
+    scanf("%lu", &data);
+    
+    bytes_union.val = data;
+    
+    for (int i = 0; i < sizeof(unsigned long); i++) {
+        printf("%u ", bytes_union.byte[i]);
     }
-
-    for (int i = 0; i < rows; i++)
-        free(matrix[i]);
-    free(matrix);
+    printf("\n");
+    
     return 0;
 }
