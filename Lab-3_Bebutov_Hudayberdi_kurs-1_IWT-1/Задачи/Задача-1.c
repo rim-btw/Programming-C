@@ -1,9 +1,19 @@
 #include <stdio.h>
 
+typedef void (*FunctionPointer)(void);
+
+void myFunction(void) {
+    printf("Функция вызвана через указатель из структуры!\n");
+}
+
+struct MyStruct {
+    FunctionPointer func;
+};
+
 int main() {
-    int a, b;
-    int *pa = &a, *pb = &b;
-    scanf("%d %d", pa, pb);
-    printf("%d\n", *pa + *pb);
+    struct MyStruct s = { myFunction };
+
+    s.func();
+
     return 0;
 }
