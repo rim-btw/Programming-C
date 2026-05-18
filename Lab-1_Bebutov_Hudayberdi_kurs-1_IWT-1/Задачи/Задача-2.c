@@ -1,13 +1,9 @@
 #include <stdio.h>
 
 int main() {
-    int a, b;
-    int *pa = &a, *pb = &b;
-    scanf("%d %d", pa, pb);
-    printf("%d %d\n", *pa, *pb);
-    int temp = *pa;
-    *pa = *pb;
-    *pb = temp;
-    printf("%d %d\n", *pa, *pb);
+    double x, y, u;
+    scanf("%lf %lf", &x, &y);
+    u = (x + y) / 2.0 + x * y;
+    printf("%.3lf\n", u);
     return 0;
 }
