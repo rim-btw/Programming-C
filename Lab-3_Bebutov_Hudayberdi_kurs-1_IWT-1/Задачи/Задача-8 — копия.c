@@ -1,24 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
+
+enum Weekday { Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье };
 
 int main() {
-    int rows = 2, cols = 3;
-    int **matrix = (int**)malloc(rows * sizeof(int*));
-    for (int i = 0; i < rows; i++)
-        matrix[i] = (int*)malloc(cols * sizeof(int));
-
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < cols; j++)
-            scanf("%d", &matrix[i][j]);
-
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++)
-            printf("%d ", matrix[i][j]);
-        printf("\n");
+    for (enum Weekday day = Понедельник; day <= Воскресенье; day++) {
+        printf("%d ", day);
     }
-
-    for (int i = 0; i < rows; i++)
-        free(matrix[i]);
-    free(matrix);
+    printf("\n");
     return 0;
 }
