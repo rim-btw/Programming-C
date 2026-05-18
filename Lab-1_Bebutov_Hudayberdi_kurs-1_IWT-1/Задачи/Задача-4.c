@@ -1,19 +1,20 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int main() {
-    int n;
-    scanf("%d", &n);
-    int *arr = (int*)malloc(n * sizeof(int));
-    if (!arr) return 1;
-    int *ptr = arr;
-    for (int i = 0; i < n; i++, ptr++)
-        scanf("%d", ptr);
-    ptr = arr;
-    int sum = 0;
-    for (int i = 0; i < n; i++, ptr++)
-        sum += *ptr;
-    printf("%d\n", sum);
-    free(arr);
+    int a, b, c;
+    int max;
+    
+    scanf("%d %d %d", &a, &b, &c);
+    
+    max = a;
+    if (b > max) {
+        max = b;
+    }
+    if (c > max) {
+        max = c;
+    }
+    
+    printf("%d\n", max);
+    
     return 0;
 }
