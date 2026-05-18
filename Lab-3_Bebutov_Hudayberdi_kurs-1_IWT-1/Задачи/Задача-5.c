@@ -1,18 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct Node {
+    int data;
+    struct Node* next;
+    struct Node* prev;
+} Node;
+
 int main() {
-    int n;
+    Node* head = NULL;
+    Node* tail = NULL;
+    Node* current = NULL;
+    int n, value;
+    
     scanf("%d", &n);
-    int *arr = (int*)malloc(n * sizeof(int));
-    if (!arr) return 1;
-    int *ptr = arr;
-    for (int i = 0; i < n; i++, ptr++)
-        scanf("%d", ptr);
-    ptr = arr + n - 1;
-    for (int i = 0; i < n; i++, ptr--)
-        printf("%d ", *ptr);
+    
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &value);
+        Node* newNode = (Node*)malloc(sizeof(Node));
+        newNode->data = value;
+        newNode->next = NULL;
+        newNode->prev = tail;
+        
+        if (tail != NULL) {
+            tail->next = newNode;
+        }
+        tail = newNode;
+        
+        if (head == NULL) {
+            head = newNode;
+        }
+    }
+    
+    current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
     printf("\n");
-    free(arr);
+    
+    current = tail;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->prev;
+    }
+    printf("\n");
+    
+    current = head;
+    while (current != NULL) {
+        Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+    
     return 0;
 }
