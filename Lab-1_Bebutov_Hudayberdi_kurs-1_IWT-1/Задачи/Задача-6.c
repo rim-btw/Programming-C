@@ -1,10 +1,18 @@
 #include <stdio.h>
 
 int main() {
-    int a = 1234567890;
-    unsigned char *ptr = (unsigned char*)&a;
-    for (int i = 0; i < sizeof(a); i++)
-        printf("%d ", ptr[i]);
+    int n;
+    int a[100];
+    
+    scanf("%d", &n);
+    
+    for (int i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+    
+    for (int i = 0; i < n; i++)
+        printf("%d ", a[i] * a[i]);
+    
     printf("\n");
+    
     return 0;
 }
