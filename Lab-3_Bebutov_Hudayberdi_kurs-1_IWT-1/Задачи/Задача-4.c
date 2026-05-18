@@ -1,19 +1,23 @@
 #include <stdio.h>
-#include <stdlib.h>
+
+struct Date {
+    unsigned int day   : 5;
+    unsigned int month : 4;
+    unsigned int year  : 11;
+};
 
 int main() {
-    int n;
-    scanf("%d", &n);
-    int *arr = (int*)malloc(n * sizeof(int));
-    if (!arr) return 1;
-    int *ptr = arr;
-    for (int i = 0; i < n; i++, ptr++)
-        scanf("%d", ptr);
-    ptr = arr;
-    int sum = 0;
-    for (int i = 0; i < n; i++, ptr++)
-        sum += *ptr;
-    printf("%d\n", sum);
-    free(arr);
+    struct Date birthday;
+    int d, m, y;
+
+    scanf("%d %d %d", &d, &m, &y);
+
+    birthday.day = d;
+    birthday.month = m;
+    birthday.year = y;
+
+    printf("%u %u %u\n", birthday.day, birthday.month, birthday.year);
+    printf("%zu\n", sizeof(birthday));
+
     return 0;
 }
